@@ -4,7 +4,6 @@ import RepoDetailsCard from '../components/RepoDetailsCard';
 
 const Landing = () => {
   const [afterCursor, setAfterCursor] = useState<string | null>(null);
-  let afterCursonNew = null;
 
   const GET_REPOSITORY = gql`
     query {
@@ -32,7 +31,6 @@ const Landing = () => {
 
   const fetchNextPage = () => {
     console.log('fetchNextPage', data.search.pageInfo.endCursor);
-    afterCursonNew = data.search.pageInfo.endCursor;
     setAfterCursor(data.search.pageInfo.endCursor);
     refetch().then((res) => {
       console.log('refetchNextPage', res);

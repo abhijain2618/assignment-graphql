@@ -6,20 +6,19 @@ import reportWebVitals from './reportWebVitals';
 import { ApolloProvider } from '@apollo/client/react';
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-
-const token = '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';
+import { GIT_GRAPHQL_URL, TOKEN } from './constants/auth';
 
 const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Token ${token}` : null
+      authorization: TOKEN ? `Token ${TOKEN}` : null
     }
   };
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(new HttpLink({ uri: 'https://api.github.com/graphql' })),
+  link: authLink.concat(new HttpLink({ uri: GIT_GRAPHQL_URL })),
   cache: new InMemoryCache()
 });
 
